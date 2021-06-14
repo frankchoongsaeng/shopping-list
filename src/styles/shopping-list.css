@@ -1,0 +1,32 @@
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+li {
+	background-color: pink;
+	padding: 0.25rem 1rem;
+}
+
+li > .title {
+	border-bottom: 1px solid rgb(95, 11, 11);
+	margin: 0;
+	margin-bottom: 0.5rem;
+}
+
+li > .description {
+	margin: 0;
+	margin-bottom: 1rem;
+}
+
+li > button.btn {
+	border: 0;
+}
+
+li > button + button {
+	margin-left: 0.75rem;
+}
+
+.remove {
+	background-color: rgb(156, 12, 12);
+}

@@ -1,7 +1,15 @@
+import { useContext } from 'react';
+import { AppContext } from '../components/appstate';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
+
+// styles
+import '../styles/form.css';
 
 function Register() {
 	const { register, handleSubmit } = useForm();
+	const context = useContext(AppContext);
+	const history = useHistory();
 
 	const handleRegister = ({ email, password, confirmPassword }) => {
 		// check if the password and confirmPassword match
@@ -28,7 +36,16 @@ function Register() {
 		)
 			.then(res => res.json())
 			.then(result => {
-				console.log(result);
+				if (result.error === true) {
+					return alert(result.message);
+				}
+
+				context.dispatch({
+					type: 'LOGIN',
+					payload: result.body,
+				});
+
+				history.push('/shopping-list');
 			})
 			.catch(err => {
 				console.log('this error occurred', err);

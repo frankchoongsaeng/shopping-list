@@ -10,8 +10,26 @@ function reducer(state, action) {
 	// set the name on our state copy to action
 	stateCopy.action = action;
 
+	// if action.type is ADD_ITEM
+	// add the payload to shoppingList
 	if (action.type === 'ADD_ITEM') {
 		stateCopy.shoppingList.unshift(action.payload);
+	}
+
+	// if action.type is LOGIN
+	// set isUserLoggedIn to true
+	// & set userData to payload
+	if (action.type === 'LOGIN') {
+		stateCopy.isUserLoggedIn = true;
+		stateCopy.userData = action.payload;
+	}
+
+	// if action.type is LOGOUT
+	// set isUserLoggedIn to false
+	// & set userData to null
+	if (action.type === 'LOGOUT') {
+		stateCopy.isUserLoggedIn = false;
+		stateCopy.userData = null;
 	}
 
 	return stateCopy;
@@ -33,7 +51,7 @@ const initialState = {
 		},
 	],
 	isUserLoggedIn: false,
-	action: '',
+	userData: null,
 };
 
 function AppState({ children }) {

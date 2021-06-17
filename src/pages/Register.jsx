@@ -1,14 +1,12 @@
-import { useContext } from 'react';
-import { AppContext } from '../components/appstate';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-
+import useContextGetter from '../hooks/useContext';
 // styles
 import '../styles/form.css';
 
 function Register() {
 	const { register, handleSubmit } = useForm();
-	const context = useContext(AppContext);
+	const context = useContextGetter();
 	const history = useHistory();
 
 	const handleRegister = ({ email, password, confirmPassword }) => {

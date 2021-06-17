@@ -1,12 +1,10 @@
-import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { AppContext } from '../components/appstate';
-
+import useContextGetter from '../hooks/useContext';
 import '../styles/form.css';
 
 function Login() {
-	const context = useContext(AppContext);
+	const context = useContextGetter();
 	console.log(context);
 
 	const { register, handleSubmit } = useForm();
@@ -31,7 +29,7 @@ function Login() {
 		)
 			.then(res => res.json())
 			.then(result => {
-				if (result.error === true) {
+				if (result.error) {
 					return alert(result.message);
 				}
 

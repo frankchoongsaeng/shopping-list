@@ -1,11 +1,11 @@
-import { useState, useRef, useContext } from 'react';
-import { AppContext } from './appstate';
+import { useState, useRef } from 'react';
+import useContextGetter from '../hooks/useContext';
 import '../styles/form.css';
 
 function Form() {
 	const [title, setTitle] = useState('');
 	const descRef = useRef();
-	const context = useContext(AppContext);
+	const context = useContextGetter();
 
 	const handleSubmit = e => {
 		e.preventDefault();

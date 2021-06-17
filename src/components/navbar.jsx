@@ -1,9 +1,8 @@
-import { useContext } from 'react';
+import useContextGetter from '../hooks/useContext';
 import { Link } from 'react-router-dom';
-import { AppContext } from './appstate';
 
 function Navbar() {
-	const context = useContext(AppContext);
+	const context = useContextGetter();
 
 	const logout = () => {
 		context.dispatch({

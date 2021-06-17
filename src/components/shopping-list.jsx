@@ -1,12 +1,11 @@
-import { useContext } from 'react';
-import { AppContext } from './appstate';
+import useContextGetter from '../hooks/useContext';
 import ListItem from './list-item';
 
 // scoped styling
 import '../styles/shopping-list.css';
 
 function ShoppingList() {
-	const context = useContext(AppContext);
+	const context = useContextGetter();
 	console.log(context);
 
 	return (

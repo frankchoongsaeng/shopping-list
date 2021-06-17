@@ -6,12 +6,13 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Navbar from './components/navbar';
 
+// REACT HOOKS
+
 function App() {
 	const context = useContext(AppContext);
 	console.log(context);
 
-	// useEffect(() => {
-	// }, []);
+	useEffect(() => {}, []);
 
 	return (
 		<BrowserRouter>

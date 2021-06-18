@@ -1,4 +1,4 @@
-import useContextGetter from '../hooks/useContext';
+import useContextGetter from '../hooks/useContextGetter';
 import ListItem from './list-item';
 
 // scoped styling

@@ -1,14 +1,17 @@
-import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import useContextGetter from '../hooks/useContext';
+import useContextGetter from '../hooks/useContextGetter';
+import useLoggedIn from '../hooks/useLoggedIn';
 import '../styles/form.css';
 
 function Login() {
+	// redirect the user to the
+	// shopping list page if they are
+	// already signed in
+	useLoggedIn();
+
 	const context = useContextGetter();
-	console.log(context);
 
 	const { register, handleSubmit } = useForm();
-	const history = useHistory();
 
 	const loginHandler = ({ email, password }) => {
 		// create data to be sent to the api for validation
@@ -38,7 +41,7 @@ function Login() {
 					payload: result.body,
 				});
 
-				history.push('/shopping-list');
+				// history.push('/shopping-list');
 			})
 			.catch(err => {
 				alert(

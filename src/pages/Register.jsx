@@ -1,13 +1,17 @@
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
-import useContextGetter from '../hooks/useContext';
+import useContextGetter from '../hooks/useContextGetter';
+import useLoggedIn from '../hooks/useLoggedIn';
 // styles
 import '../styles/form.css';
 
 function Register() {
+	// redirect the user to the
+	// shopping list page if they are
+	// already signed in
+	useLoggedIn();
+
 	const { register, handleSubmit } = useForm();
 	const context = useContextGetter();
-	const history = useHistory();
 
 	const handleRegister = ({ email, password, confirmPassword }) => {
 		// check if the password and confirmPassword match
@@ -42,8 +46,6 @@ function Register() {
 					type: 'LOGIN',
 					payload: result.body,
 				});
-
-				history.push('/shopping-list');
 			})
 			.catch(err => {
 				console.log('this error occurred', err);

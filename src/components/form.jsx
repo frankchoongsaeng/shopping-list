@@ -1,22 +1,19 @@
-import { useState, useRef } from 'react';
-import useContextGetter from '../hooks/useContext';
+import useContextGetter from '../hooks/useContextGetter';
 import '../styles/form.css';
 
 function Form() {
-	const [title, setTitle] = useState('');
-	const descRef = useRef();
 	const context = useContextGetter();
 
 	const handleSubmit = e => {
 		e.preventDefault();
 
-		if (!title || !descRef.current.value) {
+		if (!context.state.title || !context.state.description) {
 			return false;
 		}
 
 		const newItem = {
-			title: title,
-			description: descRef.current.value,
+			title: context.state.title,
+			description: context.state.description,
 			id: Date.now(),
 		};
 
@@ -26,16 +23,29 @@ function Form() {
 		});
 
 		// reset the values of the input boxes
-		setTitle('');
-		descRef.current.value = '';
+		context.dispatch({ type: 'RESET_INPUTS' });
+	};
+
+	const setTitle = e => {
+		context.dispatch({
+			type: 'UPDATE_TITLE',
+			payload: e.target.value,
+		});
+	};
+
+	const setDescription = e => {
+		context.dispatch({
+			type: 'UPDATE_DESCRIPTION',
+			payload: e.target.value,
+		});
 	};
 
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
 				<input
-					value={title}
-					onChange={e => setTitle(e.target.value)}
+					value={context.state.title}
+					onChange={setTitle}
 					type='text'
 					name='title'
 					id='title'
@@ -43,7 +53,8 @@ function Form() {
 				/>
 				<textarea
 					type='text'
-					ref={descRef}
+					value={context.state.description}
+					onChange={setDescription}
 					name='desc'
 					id='desc'
 					placeholder='Description'
